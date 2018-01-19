@@ -1,0 +1,14 @@
+{
+  "name": "kt_service_proxies",
+  "generators": [
+    {
+      "kind": "proxy",
+      "fileName": "ifaceFQCN + 'VertxKtEBProxy.kt'",
+      "templateFileName": "kotlin-template/proxygen.templ"
+    },{
+      "kind": "proxy",
+      "fileName": "ifaceFQCN + 'VertxKtProxyHandler.kt'",
+      "templateFileName": "kotlin-template/handlergen.templ"
+    }
+  ]
+}
