@@ -10,18 +10,18 @@
         <version>9</version>
     </parent>
 
-    <artifactId>vertx-kotlin-service-proxy-parent</artifactId>
+    <artifactId>vertx-service-proxy-kotlin-parent</artifactId>
 
     <version>3.5.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>vertx-kotlin-service-proxy</module>
-        <module>kotlin-service-proxy-examples</module>
+        <module>vertx-service-proxy-kotlin</module>
+        <module>service-proxy-kotlin-examples</module>
     </modules>
 
     <properties>
-        <kotlin.version>1.2.20</kotlin.version>
+        <kotlin.version>1.2.21</kotlin.version>
         <stack.version>3.5.0</stack.version>
         <vertx.version>3.5.0</vertx.version>
     </properties>
@@ -38,6 +38,16 @@
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-reflect</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-compiler-embeddable</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
             <dependency>

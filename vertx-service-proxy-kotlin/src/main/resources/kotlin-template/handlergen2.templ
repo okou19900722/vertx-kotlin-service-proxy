@@ -1,0 +1,103 @@
+@code{
+numericMapping = [
+  "byte":"byte",
+  "java.lang.Byte":"byte",
+  "short":"short",
+  "java.lang.Short":"short",
+  "int":"int",
+  "java.lang.Integer":"int",
+  "long":"long",
+  "java.lang.Long":"long",
+  "float":"float",
+  "java.lang.Float":"float",
+  "double":"double",
+  "java.lang.Double":"double"
+]
+}
+/*\n
+* Copyright 2014 Red Hat, Inc.\n
+*\n
+* Red Hat licenses this file to you under the Apache License, version 2.0\n
+* (the "License") you may not use this file except in compliance with the\n
+* License. You may obtain a copy of the License at:\n
+*\n
+* http://www.apache.org/licenses/LICENSE-2.0\n
+*\n
+* Unless required by applicable law or agreed to in writing, software\n
+* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT\n
+* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the\n
+* License for the specific language governing permissions and limitations\n
+* under the License.\n
+*/\n\n
+package @{ifacePackageName}\n
+\n
+import @{ifaceFQCN}\n
+import io.vertx.serviceproxy.ProxyHandler\n
+import io.vertx.core.Vertx\n
+//import io.vertx.core.Handler\n
+//import io.vertx.core.AsyncResult\n
+import io.vertx.core.eventbus.EventBus\n
+import io.vertx.core.eventbus.Message\n
+import io.vertx.core.eventbus.MessageConsumer\n
+import io.vertx.core.eventbus.DeliveryOptions\n
+import io.vertx.core.eventbus.ReplyException\n
+//import io.vertx.core.json.JsonObject\n
+//import io.vertx.core.json.JsonArray\n
+import java.util.Collection\n
+import java.util.ArrayList\n
+import java.util.HashSet\n
+import java.util.List\n
+import java.util.Map\n
+import java.util.Set\n
+import java.util.UUID\n
+import java.util.stream.Collectors\n
+//import io.vertx.serviceproxy.ProxyHelper\n
+//import io.vertx.serviceproxy.ProxyHandler\n
+import io.vertx.serviceproxy.ServiceException\n
+import io.vertx.serviceproxy.ServiceExceptionMessageCodec\n
+@foreach{importedType:importedTypes}
+	@if{!importedType.packageName.equals("java.lang")}
+		import @{importedType}\n
+	@end{}
+@end{}
+\n
+/*\n
+  Generated Proxy code - DO NOT EDIT\n
+  @author Roger the Robot\n
+*/\n
+//@SuppressWarnings({"unchecked", "rawtypes"})\n
+abstract class @{ifaceSimpleName}VertxProxyHandler(val vertx : Vertx, val service : @{ifaceSimpleName}, val topLevel : Boolean = true, val timeoutSeconds : Long = 300) : ProxyHandler() {\n
+\n
+    private val timerID : Long\n
+    private var lastAccessed: Long = 0\n
+    init {\n
+        this.vertx.eventBus().registerDefaultCodec(ServiceException::class.java, ServiceExceptionMessageCodec())\n
+        if (timeoutSeconds > -1 && !topLevel) {\n
+            var period = timeoutSeconds * 1000 / 2\n
+            if (period > 10000) {\n
+                period = 10000\n
+            }\n
+            this.timerID = vertx.setPeriodic(period) {\n
+                this.checkTimedOut(it)\n
+            }\n
+        } else {\n
+            this.timerID = -1\n
+        }\n
+        accessed()\n
+    }\n
+    private fun checkTimedOut(id: Long) {\n
+        val now = System.nanoTime()\n
+        if (now - lastAccessed > timeoutSeconds * 1000000000) {\n
+            close()\n
+        }\n
+    }\n
+    override fun close() {\n
+        if (timerID > -1) {\n
+            vertx.cancelTimer(timerID)\n
+        }\n
+        super.close()\n
+    }\n
+    private fun accessed() {\n
+        this.lastAccessed = System.nanoTime()\n
+    }\n
+}
