@@ -1,0 +1,4 @@
+rootProject.name = 'vertx-service-proxy-kotlin-parent'
+include 'vertx-service-proxy-kotlin'
+include 'vertx-service-proxy-kotlin-codegen'
+

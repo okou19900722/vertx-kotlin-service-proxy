@@ -1,0 +1,24 @@
+apply plugin:"java"
+apply plugin:"kotlin"
+
+group 'tk.okou'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    compile "io.vertx:vertx-service-proxy:$vertx_version"
+    compile "io.vertx:vertx-codegen:$vertx_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+buildscript {
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = 1.8
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = 1.8
+}
