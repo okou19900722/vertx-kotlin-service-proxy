@@ -9,6 +9,11 @@ dependencies {
     compile "io.vertx:vertx-service-proxy:$vertx_version"
     compile "io.vertx:vertx-codegen:$vertx_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile("org.jetbrains.kotlin:kotlin-compiler-embeddable:$kotlin_version") {
+        transitive = true
+    }
+    compile "org.jetbrains.kotlin:kotlin-annotation-processing:$kotlin_version"
 }
 buildscript {
     dependencies {

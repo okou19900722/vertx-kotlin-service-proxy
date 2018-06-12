@@ -7,7 +7,6 @@ import javax.annotation.processing.ProcessingEnvironment
 
 class ServiceProxyGeneratorLoader : GeneratorLoader {
     override fun loadGenerators(processingEnv: ProcessingEnvironment?): Stream<Generator<*>> {
-        return Stream.of(ServiceProxyGenerator())
+        return Stream.of(ProxyGenerator(), HandlerGenerator())
     }
-
 }

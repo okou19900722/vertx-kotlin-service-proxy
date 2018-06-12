@@ -7,21 +7,27 @@ allprojects {
         ext.kotlin_version = '1.2.41'
         ext.vertx_version = '3.6.0-SNAPSHOT'
         repositories {
+//            maven {
+//                url "H:\\okou\\repository\\maven"
+//            }
+//            maven {
+//                url "http://192.168.0.111:9091/repository/maven-public/"
+//            }
             maven {
-                url "H:\\okou\\repository\\maven"
-            }
-            maven {
-                url "http://192.168.0.111:9091/repository/maven-public/"
+                url "https://oss.sonatype.org/content/repositories/snapshots/"
             }
             mavenCentral()
         }
     }
     repositories {
+//        maven {
+//            url "H:\\okou\\repository\\maven"
+//        }
+//        maven {
+//            url  'http://192.168.0.111:9091/repository/maven-public/'
+//        }
         maven {
-            url "H:\\okou\\repository\\maven"
-        }
-        maven {
-            url  'http://192.168.0.111:9091/repository/maven-public/'
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
         }
         mavenCentral()
     }
