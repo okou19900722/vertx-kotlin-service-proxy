@@ -13,7 +13,7 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-compiler-embeddable:$kotlin_version") {
         transitive = true
     }
-    compile "org.jetbrains.kotlin:kotlin-annotation-processing:$kotlin_version"
+    compile files("./lib/lib.jar")
 }
 buildscript {
     dependencies {

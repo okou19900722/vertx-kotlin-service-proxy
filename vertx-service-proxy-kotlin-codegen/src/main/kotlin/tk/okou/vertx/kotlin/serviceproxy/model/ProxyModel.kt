@@ -1,8 +1,8 @@
 package tk.okou.vertx.kotlin.serviceproxy.model
 
-import ext.kotlin.kotlinClassHeader
 import io.vertx.codegen.GenException
 import io.vertx.codegen.annotations.VertxGen
+import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
@@ -60,6 +60,7 @@ class ProxyModel(env: ProcessingEnvironment, modelElt: TypeElement) : VertxProxy
                 env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, annotation.annotationType.toString())
 //                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, elem.toString())
                 env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, annotation.elementValues.size.toString())
+                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, elem.kotlinMetadata?.header?.data.toString())
 //                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, elem.kotlinClassHeader?.data.toString())
 //                annotation.elementValues.forEach {key, value ->
 //                    env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, key.simpleName)
