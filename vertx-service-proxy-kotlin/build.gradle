@@ -10,6 +10,7 @@ dependencies {
 //    compile "io.vertx:vertx-service-proxy:$vertx_version"
     compileOnly "io.vertx:vertx-codegen:$vertx_version"
 //    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile project(":vertx-service-proxy-kotlin-codegen")
     kapt project(":vertx-service-proxy-kotlin-codegen")
 }
 buildscript {
