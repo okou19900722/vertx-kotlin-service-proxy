@@ -52,20 +52,22 @@ class ProxyModel(env: ProcessingEnvironment, modelElt: TypeElement) : VertxProxy
                 ifacePackageName = elementUtils.getPackageOf(elem).qualifiedName.toString()
                 ifaceComment = elementUtils.getDocComment(elem)
                 doc = docFactory.createDoc(elem)
-//                val an = elem.annotationMirrors.filter {
-//                    (it.annotationType.asElement() as TypeElement).qualifiedName.toString() == "kotlin.Metadata"
-//                }.firstOrNull()
+                concrete = elem.getAnnotation(VertxGen::class.java) == null || elem.getAnnotation(VertxGen::class.java).concrete
                 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
                 val metadata = elem.getAnnotation(Metadata::class.java)
+                val annotation = elem.annotationMirrors.filter {
+                    (it.annotationType.asElement() as TypeElement).qualifiedName.toString() == "kotlin.Metadata"
+                }.first()
 
-
-//                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${an?.elementValues?.size}")
-//                an?.elementValues?.forEach { key, value ->
-//                    env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${key.defaultValue}")
+                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, annotation.annotationType.toString())
+//                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, elem.toString())
+                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, annotation.elementValues.size.toString())
+                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, elem.kotlinMetadata?.header?.data.toString())
+//                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, elem.kotlinClassHeader?.data.toString())
+//                annotation.elementValues.forEach {key, value ->
+//                    env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, key.simpleName)
+//                    env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, value.javaClass.toString())
 //                }
-//
-//                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${an == null}")
-
             }
             else -> {
                 throw GenException(elem, "@VertxGen can only be used with interfaces or enums in " + elem.asType().toString())
