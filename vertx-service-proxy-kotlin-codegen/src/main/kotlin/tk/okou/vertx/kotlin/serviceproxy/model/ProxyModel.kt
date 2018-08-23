@@ -7,7 +7,7 @@ import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
-import io.vertx.serviceproxy.model.ProxyModel as VertxProxyModel
+import io.vertx.serviceproxy.generator.model.ProxyModel as VertxProxyModel
 import javax.lang.model.element.ElementKind.*
 
 class ProxyModel(env: ProcessingEnvironment, modelElt: TypeElement) : VertxProxyModel(env, modelElt) {
@@ -52,7 +52,19 @@ class ProxyModel(env: ProcessingEnvironment, modelElt: TypeElement) : VertxProxy
                 ifacePackageName = elementUtils.getPackageOf(elem).qualifiedName.toString()
                 ifaceComment = elementUtils.getDocComment(elem)
                 doc = docFactory.createDoc(elem)
-                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${doc == null}")
+//                val an = elem.annotationMirrors.filter {
+//                    (it.annotationType.asElement() as TypeElement).qualifiedName.toString() == "kotlin.Metadata"
+//                }.firstOrNull()
+                @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+                val metadata = elem.getAnnotation(Metadata::class.java)
+
+
+//                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${an?.elementValues?.size}")
+//                an?.elementValues?.forEach { key, value ->
+//                    env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${key.defaultValue}")
+//                }
+//
+//                env.messager.printMessage(Diagnostic.Kind.MANDATORY_WARNING, "${an == null}")
 
             }
             else -> {

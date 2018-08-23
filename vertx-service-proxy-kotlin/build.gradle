@@ -8,7 +8,9 @@ sourceCompatibility = 1.8
 
 dependencies {
 //    compile "io.vertx:vertx-service-proxy:$vertx_version"
-    compileOnly "io.vertx:vertx-codegen:$vertx_version"
+    compile "io.vertx:vertx-codegen:$vertx_version"
+    kapt "io.vertx:vertx-codegen:$vertx_version"
+    kapt "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 //    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     kapt project(":vertx-service-proxy-kotlin-codegen")
 }
@@ -33,4 +35,5 @@ kapt {
 //        arg("codegen.generators", "kotlinServiceProxy")
     }
     processors = "tk.okou.vertx.kotlin.serviceproxy.ProxyGenProcessor"
+    correctErrorTypes = true
 }
