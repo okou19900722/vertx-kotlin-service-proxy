@@ -47,6 +47,21 @@
 
         <plugins>
             <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-clean</id>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>src/main/generated/service</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <version>${kotlin.version}</version>
